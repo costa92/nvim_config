@@ -4,6 +4,8 @@ local opt = vim.opt
 -- :help options
 g.mapleader = ' '
 g.skcode_theme = skcode.load_config().ui.theme
+g.loaded_netrw = true  -- 
+g.loaded_netrwPlugin = true
 
 -- 更多配置可以查看文档: https://yianwillis.github.io/vimcdoc/doc/quickref.html#option-list
 opt.backup = false -- 覆盖文件时保留备份文件
@@ -33,7 +35,7 @@ opt.shiftwidth = 2 -- 1 tab = 2 空格
 opt.tabstop = 2 -- 1 tab = 2 空格
 opt.cursorline = true -- 高亮当前行
 opt.number = true -- 显示行号
-opt.relativenumber = true -- 使用相对行号
+opt.relativenumber = false -- 使用相对行号
 opt.numberwidth = 2 -- 行号宽度: 2
 opt.signcolumn = 'yes' -- 始终显示符号列，否则每次都会移动文本
 opt.wrap = false -- 长行回绕并在下一行继续
@@ -51,6 +53,11 @@ opt.shortmess:append('c')
 
 vim.cmd('set whichwrap+=<,>,[,],h,l')
 vim.cmd([[set iskeyword+=-]])
+
+-- 再来显示下行号及右边界警示线。右边界一般建议为 80，即代码超过 80 个字符应该注意换行。对现在的屏幕分辨率来说，80 其实有些窄，可以设为 120。
+vim.wo.number = true
+vim.wo.colorcolumn = "120"
+
 
 vim.schedule(function()
   vim.opt.shadafile = vim.fn.expand('$HOME') .. '/.local/share/nvim/shada/main.shada'

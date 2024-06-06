@@ -68,9 +68,32 @@ require('lazy').setup({
   {
     'lukas-reineke/indent-blankline.nvim',
     event = 'BufRead',
-    config = function()
-      require('plugin-configs.blankline')
-    end,
+    main = "ibl",
+    opts = {
+      indent = {
+        char = "│",
+        tab_char = "│",
+      },
+      scope = { show_start = false, show_end = false },
+      exclude = {
+        filetypes = {
+          "help",
+          "alpha",
+          "dashboard",
+          "neo-tree",
+          "Trouble",
+          "trouble",
+          "lazy",
+          "mason",
+          "notify",
+          "toggleterm",
+          "lazyterm",
+        },
+      },
+    },
+    -- config = function()
+    --   require('plugin-configs.blankline')
+    -- end,
   },
 
   {
@@ -187,28 +210,28 @@ require('lazy').setup({
     end,
   },
 
-  -- {
-  --   'zbirenbaum/copilot.lua',
-  --   cmd = 'Copilot',
-  --   event = 'VimEnter',
-  --   config = function()
-  --     vim.defer_fn(function()
-  --       require('copilot').setup()
-  --     end, 100)
-  --   end,
-  --   opts = {
-  --     suggestion = { enabled = false },
-  --     panel = { enabled = false },
-  --   },
-  -- },
-  --
-  -- {
-  --   'zbirenbaum/copilot-cmp',
-  --   dependencies = 'zbirenbaum/copilot.lua',
-  --   config = function()
-  --     require('copilot_cmp').setup()
-  --   end,
-  -- },
+  {
+    'zbirenbaum/copilot.lua',
+    cmd = 'Copilot',
+    event = 'VimEnter',
+    config = function()
+      vim.defer_fn(function()
+        require('copilot').setup()
+      end, 100)
+    end,
+    opts = {
+      suggestion = { enabled = false },
+      panel = { enabled = false },
+    },
+  },
+  
+  {
+    'zbirenbaum/copilot-cmp',
+    dependencies = 'zbirenbaum/copilot.lua',
+    config = function()
+      require('copilot_cmp').setup()
+    end,
+  },
 
   -- 输入提示函数参数
   {

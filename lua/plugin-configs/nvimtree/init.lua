@@ -35,14 +35,19 @@ if present then
     vim.keymap.set('n', 'o', api.node.open.edit, opts('Open'))
     vim.keymap.set('n', 'h', api.node.navigate.parent_close, opts('Close Directory'))
     vim.keymap.set('n', 'v', api.node.open.vertical, opts('Open: Vertical Split'))
-    vim.keymap.set('n', 'V', api.node.open.horizontal, opts('Open: Horizontal Split'))
+    -- 水平打开
+    vim.keymap.set('n', 's', api.node.open.horizontal, opts('Open: Horizontal Split'))
     vim.keymap.set('n', 'ga', git_add, opts('Git Add'))
   end
 
   nvimtree.setup({
+    	-- needed by project-----
+	  sync_root_with_cwd = true,
+	  sort_by = "case_sensitive",
+
     disable_netrw = true,
     hijack_netrw = true,
-    open_on_tab = false,
+    open_on_tab = true,
     hijack_cursor = false,
     update_cwd = true,
     update_focused_file = {
@@ -59,11 +64,12 @@ if present then
     },
     actions = {
       open_file = {
-        resize_window = false,
-        quit_on_open = false,
+        resize_window = tree,
+        quit_on_open = tree,
       },
     },
     filters = {
+      -- 显示.开头的文件
       dotfiles = false,
       custom = { '^.git$' },
       exclude = { 'node_modules' },
@@ -72,7 +78,15 @@ if present then
       root_folder_label = false,
       highlight_git = true,
       indent_markers = {
-        enable = true,
+        enable = false,
+        inline_arrows = true,
+        icons = {
+          corner = "└",
+          edge = "│",
+          item = "│",
+          bottom = "─",
+          none = " ",
+        },
       },
       icons = {
         webdev_colors = true,
@@ -100,14 +114,13 @@ if present then
             arrow_closed = '',
           },
           git = {
-            unstaged = '',
-            staged = '✓',
-            unmerged = '',
-            renamed = '➜',
-            untracked = '★',
-            deleted = '',
-            untracked = 'u',
-            ignored = '◌',
+            unstaged = "❌",
+			   		staged = "💯",
+				  	unmerged = "🪵",
+					  renamed = "📐",
+					  untracked = "📑",
+					  deleted = "🗑️",
+					  ignored = "👀",
           },
         },
       },
