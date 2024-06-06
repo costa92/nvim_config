@@ -71,8 +71,13 @@ if present then
     filters = {
       -- 显示.开头的文件
       dotfiles = false,
+      -- 不显示 .git 目录中的内容
       custom = { '^.git$' },
-      exclude = { 'node_modules' },
+      -- 显示 .gitignore,node_modules
+      exclude = { 
+        'node_modules',
+        'gitignore' 
+      },
     },
     renderer = {
       root_folder_label = false,
